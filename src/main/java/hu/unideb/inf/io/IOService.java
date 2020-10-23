@@ -4,4 +4,7 @@ public interface IOService {
 
     String getPlayerName();
 
+    void displayMessage(String msg);
+
+    String awaitResponseString();
 }

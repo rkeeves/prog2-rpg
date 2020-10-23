@@ -9,4 +9,14 @@ public class ConsoleIOService implements IOService {
         System.out.print("Please define your nick: ");
         return new Scanner(System.in).nextLine();
     }
+
+    @Override
+    public void displayMessage(String msg) {
+        System.out.println(msg);
+    }
+
+    @Override
+    public String awaitResponseString() {
+        return new Scanner(System.in).nextLine();
+    }
 }
