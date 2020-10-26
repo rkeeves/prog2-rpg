@@ -6,7 +6,7 @@ public class EnemyCreationService implements EntityFactory {
 
     @Override
     public Enemy create() {
-        return new Enemy();
+        return Enemy.builder().build();
     }
 
 }
