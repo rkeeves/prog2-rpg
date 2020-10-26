@@ -1,7 +1,8 @@
-package hu.unideb.inf.utils;
+package hu.unideb.inf.datastructures;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,125 +12,182 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class HashGraphTest {
 
     @Test
-    void given_graph_when_addDirectedEdgeAndSourceIsNull_Throw() {
+    void addDirectedEdge_NullAsFirstParamAndAnyAsSecondParam_ThrowNullPointerException() {
         // given
-        HashGraph<Integer> g = new HashGraph<Integer>();
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
         // when, then
-        assertThrows(NullPointerException.class, () -> g.addDirectedEdge(null, 0));
+        assertThrows(NullPointerException.class, () -> directedGraph.addDirectedEdge(null, 0));
     }
 
     @Test
-    void given_graph_when_addDirectedEdgeAndTargetIsNull_Throw() {
+    void addDirectedEdge_AnyAsFirstParamAndNullAsSecondParam_ThrowNullPointerException() {
         // given
-        HashGraph<Integer> g = new HashGraph<Integer>();
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
         // when, then
-        assertThrows(NullPointerException.class, () -> g.addDirectedEdge(0, null));
+        assertThrows(NullPointerException.class, () -> directedGraph.addDirectedEdge(0, null));
     }
 
     @Test
-    void given_graph_when_addDirectedEdgeAndBothAreNull_Throw() {
+    void addDirectedEdge_NullAsFirstParamAndNullSecondParam_ThrowNullPointerException() {
         // given
-        HashGraph<Integer> g = new HashGraph<Integer>();
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
         // when, then
-        assertThrows(NullPointerException.class, () -> g.addDirectedEdge(null, null));
+        assertThrows(NullPointerException.class, () -> directedGraph.addDirectedEdge(null, null));
     }
 
     @Test
-    void given_directedEmptyGraph_when_getNodesReachableFrom0_ReturnEmpty() {
+    void addDirectedEdge_NonNullFirstParamAndNonNullSecondParam_NoException() {
         // given
-        DirectedGraph<Integer> g = new HashGraph<Integer>();
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
+        // when, then
+        directedGraph.addDirectedEdge(0, 0);
+    }
+
+    @Test
+    void getNodesReachableFrom_ParamIsNullAndAnyEdgesInDirectedGraph_ReturnEmptySet() {
+        // given
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
         // when
-        var res = g.getNodesReachableFrom(0);
+        var res = directedGraph.getNodesReachableFrom(null);
         // then
         Set<Integer> expected = new HashSet<>();
         assertEquals(expected, res);
     }
 
     @Test
-    void given_directed0to0_when_getNodesReachableFrom0_Return0() {
+    void getNodesReachableFrom_ParamIsAnyAndNoEdgesInDirectedGraph_ReturnEmptySet() {
         // given
-        DirectedGraph<Integer> g = new HashGraph<Integer>();
-        g.addDirectedEdge(0, 0);
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
         // when
-        var res = g.getNodesReachableFrom(0);
-        // then
-        Set<Integer> expected = new HashSet<>();
-        expected.add(0);
-        assertEquals(expected, res);
-    }
-
-    @Test
-    void given_directed0to1_when_getNodesReachableFrom0_Return1() {
-        // given
-        DirectedGraph<Integer> g = new HashGraph<Integer>();
-        g.addDirectedEdge(0, 1);
-        // when
-        var res = g.getNodesReachableFrom(0);
-        // then
-        Set<Integer> expected = new HashSet<>();
-        expected.add(1);
-        assertEquals(expected, res);
-    }
-
-    @Test
-    void given_directed0to1_when_getNodesReachableFrom1_ReturnEmpty() {
-        // given
-        DirectedGraph<Integer> g = new HashGraph<Integer>();
-        g.addDirectedEdge(0, 1);
-        // when
-        var res = g.getNodesReachableFrom(1);
+        var res = directedGraph.getNodesReachableFrom(0);
         // then
         Set<Integer> expected = new HashSet<>();
         assertEquals(expected, res);
     }
 
     @Test
-    void given_udirectedEmptyGraph_when_getNodesReachableFrom0_ReturnEmpty() {
+    void getNodesReachableFrom_ParamIs0AndEdge0To0InDirectedGraph_ReturnSetWith0() {
         // given
-        UndirectedGraph<Integer> g = new HashGraph<Integer>();
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
+        directedGraph.addDirectedEdge(0, 0);
         // when
-        var res = g.getNodesReachableFrom(0);
+        var res = directedGraph.getNodesReachableFrom(0);
+        // then
+        Set<Integer> expected = new HashSet<>(Collections.singletonList(0));
+        assertEquals(expected, res);
+    }
+
+    @Test
+    void getNodesReachableFrom_ParamIs0AndEdge0To1InDirectedGraph_ReturnSetWith1() {
+        // given
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
+        directedGraph.addDirectedEdge(0, 1);
+        // when
+        var res = directedGraph.getNodesReachableFrom(0);
+        // then
+        Set<Integer> expected = new HashSet<>(Collections.singletonList(1));
+        assertEquals(expected, res);
+    }
+
+    @Test
+    void getNodesReachableFrom_ParamIs1AndEdge0To1InDirectedGraph_ReturnEmptySet() {
+        // given
+        DirectedGraph<Integer> directedGraph = new HashGraph<>();
+        directedGraph.addDirectedEdge(0, 1);
+        // when
+        var res = directedGraph.getNodesReachableFrom(1);
         // then
         Set<Integer> expected = new HashSet<>();
         assertEquals(expected, res);
     }
 
     @Test
-    void given_undirected0to0_when_getNodesReachableFrom0_Return0() {
+    void addUndirectedEdge_NullAsFirstParamAndAnyAsSecondParam_ThrowNullPointerException() {
         // given
-        UndirectedGraph<Integer> g = new HashGraph<Integer>();
-        g.addUndirectedEdge(0, 0);
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
+        // when, then
+        assertThrows(NullPointerException.class, () -> undirectedGraph.addUndirectedEdge(null, 0));
+    }
+
+    @Test
+    void addUndirectedEdge_AnyAsFirstParamAndNullAsSecondParam_ThrowNullPointerException() {
+        // given
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
+        // when, then
+        assertThrows(NullPointerException.class, () -> undirectedGraph.addUndirectedEdge(0, null));
+    }
+
+    @Test
+    void addUndirectedEdge_NullAsFirstParamAndNullSecondParam_ThrowNullPointerException() {
+        // given
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
+        // when, then
+        assertThrows(NullPointerException.class, () -> undirectedGraph.addUndirectedEdge(null, null));
+    }
+
+    @Test
+    void addUndirectedEdge_NonNullFirstParamAndNonNullSecondParam_NoException() {
+        // given
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
+        // when, then
+        undirectedGraph.addUndirectedEdge(0, 0);
+    }
+
+    @Test
+    void getNodesReachableFrom_ParamIsNullAndAnyEdgesInUndirectedGraph_ReturnEmptySet() {
+        // given
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
         // when
-        var res = g.getNodesReachableFrom(0);
+        var res = undirectedGraph.getNodesReachableFrom(null);
         // then
         Set<Integer> expected = new HashSet<>();
-        expected.add(0);
         assertEquals(expected, res);
     }
 
     @Test
-    void given_undirected0to1_when_getNodesReachableFrom0_Return1() {
+    void getNodesReachableFrom_ParamIsAnyAndNoEdgesInUndirectedGraph_ReturnEmptySet() {
         // given
-        UndirectedGraph<Integer> g = new HashGraph<Integer>();
-        g.addUndirectedEdge(0, 1);
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
         // when
-        var res = g.getNodesReachableFrom(0);
+        var res = undirectedGraph.getNodesReachableFrom(0);
         // then
         Set<Integer> expected = new HashSet<>();
-        expected.add(1);
         assertEquals(expected, res);
     }
 
     @Test
-    void given_undirected0to1_when_getNodesReachableFrom1_Return0() {
+    void getNodesReachableFrom_ParamIs0AndEdge0To0InUndirectedGraph_ReturnSetWith0() {
         // given
-        UndirectedGraph<Integer> g = new HashGraph<Integer>();
-        g.addUndirectedEdge(0, 1);
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
+        undirectedGraph.addUndirectedEdge(0, 0);
         // when
-        var res = g.getNodesReachableFrom(1);
+        var res = undirectedGraph.getNodesReachableFrom(0);
         // then
-        Set<Integer> expected = new HashSet<>();
-        expected.add(0);
+        Set<Integer> expected = new HashSet<>(Collections.singletonList(0));
+        assertEquals(expected, res);
+    }
+
+    @Test
+    void getNodesReachableFrom_ParamIs0AndEdge0To1InUndirectedGraph_ReturnSetWith1() {
+        // given
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
+        undirectedGraph.addUndirectedEdge(0, 1);
+        // when
+        var res = undirectedGraph.getNodesReachableFrom(0);
+        // then
+        Set<Integer> expected = new HashSet<>(Collections.singletonList(1));
+        assertEquals(expected, res);
+    }
+
+    @Test
+    void getNodesReachableFrom_ParamIs1AndEdge0To1InUndirectedGraph_ReturnSetWith0() {
+        // given
+        UndirectedGraph<Integer> undirectedGraph = new HashGraph<>();
+        undirectedGraph.addUndirectedEdge(0, 1);
+        // when
+        var res = undirectedGraph.getNodesReachableFrom(1);
+        // then
+        Set<Integer> expected = new HashSet<>(Collections.singletonList(0));
         assertEquals(expected, res);
     }
 }
