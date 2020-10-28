@@ -1,4 +1,4 @@
-package hu.unideb.inf.rpg.core.ecs.component;
+package hu.unideb.inf.rpg.core.ecs.entity;
 
 import hu.unideb.inf.rpg.core.ecs.event.ComponentAttachedEvent;
 import hu.unideb.inf.rpg.core.ecs.event.EventManager;

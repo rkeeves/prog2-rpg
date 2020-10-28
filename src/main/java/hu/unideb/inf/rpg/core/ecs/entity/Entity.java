@@ -1,4 +1,4 @@
-package hu.unideb.inf.rpg.core.ecs.component;
+package hu.unideb.inf.rpg.core.ecs.entity;
 
 import lombok.Getter;
 

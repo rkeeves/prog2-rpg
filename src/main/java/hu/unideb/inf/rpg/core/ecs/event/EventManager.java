@@ -1,6 +1,6 @@
 package hu.unideb.inf.rpg.core.ecs.event;
 
-import hu.unideb.inf.rpg.core.ecs.component.EntityManager;
+import hu.unideb.inf.rpg.core.ecs.entity.EntityManager;
 
 public interface EventManager {
 

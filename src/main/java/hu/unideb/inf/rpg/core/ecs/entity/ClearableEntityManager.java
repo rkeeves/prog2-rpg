@@ -1,4 +1,4 @@
-package hu.unideb.inf.rpg.core.ecs.component;
+package hu.unideb.inf.rpg.core.ecs.entity;
 
 /**
  * This interface provides a way to clean up dead entities.

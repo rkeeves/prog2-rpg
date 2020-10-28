@@ -1,9 +1,9 @@
-package hu.unideb.inf.rpg.core.ecs.component;
+package hu.unideb.inf.rpg.core.ecs.entity;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,13 +62,11 @@ public class EntityTest {
     }
 
     @Test
-    void givenEntityWithNoAComponent_whenGetComponentTypeA_ReturnEmpty(){
+    void givenEntityWithNoAComponent_whenGetComponentTypeA_Throw(){
         // given
         Entity e = new Entity(0);
-        // when
-        var res = e.getComponent(A.class);
-        // then
-        assertEquals(Optional.empty(),res);
+        // when, then
+        assertThrows(NoSuchElementException.class,()->e.getComponent(A.class));
     }
 
     @Test
@@ -80,7 +78,7 @@ public class EntityTest {
         // when
         var res = e.getComponent(A.class);
         // then
-        assertEquals(Optional.of(a),res);
+        assertEquals(a,res);
     }
 
     @Test
@@ -94,7 +92,7 @@ public class EntityTest {
         // when
         var res = e.getComponent(A.class);
         // then
-        assertEquals(Optional.of(a0),res);
+        assertEquals(a0,res);
     }
 
     @Test

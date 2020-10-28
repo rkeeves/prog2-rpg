@@ -1,7 +1,7 @@
 package hu.unideb.inf.rpg.core.ecs;
 
-import hu.unideb.inf.rpg.core.ecs.component.BasicEntityManager;
-import hu.unideb.inf.rpg.core.ecs.component.ClearableEntityManager;
+import hu.unideb.inf.rpg.core.ecs.entity.BasicEntityManager;
+import hu.unideb.inf.rpg.core.ecs.entity.ClearableEntityManager;
 import hu.unideb.inf.rpg.core.ecs.event.BasicEventManager;
 import hu.unideb.inf.rpg.core.ecs.event.EventManager;
 import hu.unideb.inf.rpg.core.ecs.system.BasicSubSystemManager;
@@ -25,6 +25,10 @@ public class ECS {
     public void configure(){
         events.setEntityManager(entities);
         systems.setupListeners(events);
+    }
+
+    public void beforeFirstUpdate(){
+        systems.beforeFirstUpdate(events,entities);
     }
 
     public void update(){

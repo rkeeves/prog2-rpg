@@ -1,6 +1,6 @@
 package hu.unideb.inf.rpg.core.ecs.event;
 
-import hu.unideb.inf.rpg.core.ecs.component.EntityManager;
+import hu.unideb.inf.rpg.core.ecs.entity.EntityManager;
 import lombok.Setter;
 
 import java.util.HashMap;
@@ -18,17 +18,17 @@ public class BasicEventManager implements EventManager{
 
     @Override
     public <E> void register(Class<E> eventClass, EventListener<E> consumer) {
-        fetchList(eventClass).add(consumer);
+        getListenersFor(eventClass).add(consumer);
     }
 
     @Override
     public <E> void fire(E event) {
-        fetchList(event.getClass())
+        getListenersFor(event.getClass())
                 .stream()
-                .anyMatch(cons->((EventListener<E>)cons).accept(event,this,entityManager));
+                .allMatch(listener -> ((EventListener<E>)listener).accept(event, this, entityManager));
     }
 
-    private List<EventListener<?>> fetchList(Class<?> eventCls){
+    private List<EventListener<?>> getListenersFor(Class<?> eventCls){
         return consumers
                 .computeIfAbsent(eventCls,e->new LinkedList<>());
     }

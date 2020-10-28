@@ -1,6 +1,6 @@
 package hu.unideb.inf.rpg.core.ecs.system;
 
-import hu.unideb.inf.rpg.core.ecs.component.EntityManager;
+import hu.unideb.inf.rpg.core.ecs.entity.EntityManager;
 import hu.unideb.inf.rpg.core.ecs.event.EventManager;
 import lombok.AllArgsConstructor;
 
@@ -14,6 +14,11 @@ public class BasicSubSystemManager implements SubSystemManager {
     @Override
     public void setupListeners(EventManager events) {
         subSystems.forEach(s->s.onListenerSetup(events));
+    }
+
+    @Override
+    public void beforeFirstUpdate(EventManager events, EntityManager entities) {
+        subSystems.forEach(s->s.onBeforeFirstUpdate(events,entities));
     }
 
     @Override
