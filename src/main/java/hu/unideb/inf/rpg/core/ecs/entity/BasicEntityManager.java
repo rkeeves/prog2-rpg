@@ -1,5 +1,6 @@
 package hu.unideb.inf.rpg.core.ecs.component;
 
+import hu.unideb.inf.rpg.core.ecs.event.ComponentAttachedEvent;
 import hu.unideb.inf.rpg.core.ecs.event.EventManager;
 import lombok.RequiredArgsConstructor;
 
@@ -61,7 +62,7 @@ public class BasicEntityManager implements ClearableEntityManager {
     @Override
     public <C> void attach(Entity entity, C component) {
         entity.attachComponent(component);
-        var attachedEvent = new ComponentLifecycleEvent(entity,component, ComponentLifecycleEvent.ComponentPhase.POST_ATTACH);
+        var attachedEvent = new ComponentAttachedEvent(entity,component);
         eventManager.fire(attachedEvent);
     }
 
