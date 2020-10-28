@@ -1,6 +1,6 @@
 package hu.unideb.inf.rpg.player;
 
-import hu.unideb.inf.rpg.out.RequestInstantMessageOutputEvent;
+import hu.unideb.inf.rpg.output.RequestInstantMessageOutputEvent;
 import hu.unideb.inf.rpg.in.RequestInstantMessageInputEvent;
 import hu.unideb.inf.rpg.in.TextInputComponent;
 import hu.unideb.inf.rpg.core.ecs.entity.EntityManager;

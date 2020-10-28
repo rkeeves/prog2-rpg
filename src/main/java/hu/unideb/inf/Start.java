@@ -2,7 +2,7 @@ package hu.unideb.inf;
 
 import hu.unideb.inf.rpg.core.ecs.ECS;
 import hu.unideb.inf.rpg.core.ecs.system.SubSystem;
-import hu.unideb.inf.rpg.out.ConsoleOutputSystem;
+import hu.unideb.inf.rpg.output.ConsoleOutputSystem;
 import hu.unideb.inf.rpg.player.PlayerSubsystem;
 import hu.unideb.inf.rpg.spawn.SpawnSystem;
 import hu.unideb.inf.rpg.in.ConsoleInputSystem;
